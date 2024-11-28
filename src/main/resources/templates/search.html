@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Player Search</title>
+</head>
+<body>
+<h1>Search for a Player</h1>
+<form action="/player/result" method="get">
+    <label for="name">Player Name:</label>
+    <input type="text" id="name" name="name" required>
+    <button type="submit">Search</button>
+</form>
+</body>
+</html>

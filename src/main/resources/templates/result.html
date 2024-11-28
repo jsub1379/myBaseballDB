@@ -1,18 +1,62 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Search Result</title>
+    <title>Player Info</title>
 </head>
 <body>
-<h1>Search Result</h1>
-<div th:if="${student}">
-  <p><strong>Name:</strong> <span th:text="${student.name}"></span></p>
-  <p><strong>Student Number:</strong> <span th:text="${student.studentNumber}"></span></p>
-  <p><strong>Grade:</strong> <span th:text="${student.grade}"></span></p>
+<h1>Player Info</h1>
+<div th:if="${player}">
+    <h2 th:text="${type} + ' Details'"></h2>
+
+    <p><b>Name:</b> <span th:text="${player.playerName}"></span></p>
+    <p><b>Team:</b> <span th:text="${player.team}"></span></p>
+
+    <!-- If the player is a Batter -->
+    <div th:if="${type == 'Batter'}">
+        <p><b>Games Played:</b> <span th:text="${player.gamesPlayed}"></span></p>
+        <p><b>Plate Appearances:</b> <span th:text="${player.plateAppearances}"></span></p>
+        <p><b>Hits:</b> <span th:text="${player.hits}"></span></p>
+        <p><b>Doubles:</b> <span th:text="${player.doubles}"></span></p>
+        <p><b>Triples:</b> <span th:text="${player.triples}"></span></p>
+        <p><b>Home Runs:</b> <span th:text="${player.homeRuns}"></span></p>
+        <p><b>Runs Batted In:</b> <span th:text="${player.runsBattedIn}"></span></p>
+        <p><b>Stolen Bases:</b> <span th:text="${player.stolenBases}"></span></p>
+        <p><b>Caught Stealing:</b> <span th:text="${player.caughtStealing}"></span></p>
+        <p><b>Walks:</b> <span th:text="${player.walks}"></span></p>
+        <p><b>Hit by Pitch:</b> <span th:text="${player.hitByPitch}"></span></p>
+        <p><b>Strikeouts:</b> <span th:text="${player.strikeouts}"></span></p>
+        <p><b>Errors:</b> <span th:text="${player.errors}"></span></p>
+        <p><b>Batting Average:</b> <span th:text="${player.battingAverage}"></span></p>
+        <p><b>On Base Percentage:</b> <span th:text="${player.onBasePercentage}"></span></p>
+        <p><b>Slugging Percentage:</b> <span th:text="${player.sluggingPercentage}"></span></p>
+        <p><b>OPS:</b> <span th:text="${player.ops}"></span></p>
+    </div>
+
+    <!-- If the player is a Pitcher -->
+    <div th:if="${type == 'Pitcher'}">
+        <p><b>Games Played:</b> <span th:text="${player.gamesPlayed}"></span></p>
+        <p><b>Innings Pitched:</b> <span th:text="${player.inningsPitched}"></span></p>
+        <p><b>Wins:</b> <span th:text="${player.wins}"></span></p>
+        <p><b>Losses:</b> <span th:text="${player.losses}"></span></p>
+        <p><b>Saves:</b> <span th:text="${player.saves}"></span></p>
+        <p><b>Holds:</b> <span th:text="${player.holds}"></span></p>
+        <p><b>Hits Allowed:</b> <span th:text="${player.hitsAllowed}"></span></p>
+        <p><b>Home Runs Allowed:</b> <span th:text="${player.homeRunsAllowed}"></span></p>
+        <p><b>Walks Allowed:</b> <span th:text="${player.walksAllowed}"></span></p>
+        <p><b>Hit by Pitch:</b> <span th:text="${player.hitByPitch}"></span></p>
+        <p><b>Strikeouts:</b> <span th:text="${player.strikeouts}"></span></p>
+        <p><b>Runs Allowed:</b> <span th:text="${player.runsAllowed}"></span></p>
+        <p><b>Earned Runs:</b> <span th:text="${player.earnedRuns}"></span></p>
+        <p><b>Earned Run Average:</b> <span th:text="${player.earnedRunAverage}"></span></p>
+        <p><b>WHIP:</b> <span th:text="${player.whip}"></span></p>
+        <p><b>K/BB:</b> <span th:text="${player.kPerBb}"></span></p>
+    </div>
 </div>
-<div th:if="${error}">
-  <p th:text="${error}"></p>
+
+<div th:if="${message}">
+    <p th:text="${message}"></p>
 </div>
-<a href="/">Back to Search</a>
+
+<a href="/player/search">Search Another Player</a>
 </body>
 </html>
