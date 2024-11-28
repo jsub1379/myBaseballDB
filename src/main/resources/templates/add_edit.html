@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add or Edit Player</title>
+    <script>
+        // 숫자 입력 제어 함수 (정수와 실수 모두 가능)
+        function validateNumberInput(Event, isFloat = false) {
+            const regex = isFloat ? /[^0-9.]/g : /[^0-9]/g;
+            Event.target.value = Event.target.value.replace(regex, '');
+        }
+    </script>
+</head>
+<body>
+<h1>Add or Edit Player</h1>
+
+<!-- 타자 추가 및 수정 -->
+<h2>Batter (타자)</h2>
+<form action="/player/save-batter" method="post">
+    <label for="batterName">Name:</label>
+    <input type="text" id="batterName" name="playerName" required><br>
+
+    <label for="batterTeam">Team:</label>
+    <input type="text" id="batterTeam" name="team" required><br>
+
+    <label for="batterGamesPlayed">Games Played:</label>
+    <input type="text" id="batterGamesPlayed" name="gamesPlayed" oninput="validateNumberInput(Event)"><br>
+
+    <label for="plateAppearances">Plate Appearances:</label>
+    <input type="text" id="plateAppearances" name="plateAppearances" oninput="validateNumberInput(Event)"><br>
+
+    <label for="hits">Hits:</label>
+    <input type="text" id="hits" name="hits" oninput="validateNumberInput(Event)"><br>
+
+    <label for="doubles">Doubles:</label>
+    <input type="text" id="doubles" name="doubles" oninput="validateNumberInput(Event)"><br>
+
+    <label for="triples">Triples:</label>
+    <input type="text" id="triples" name="triples" oninput="validateNumberInput(Event)"><br>
+
+    <label for="homeRuns">Home Runs:</label>
+    <input type="text" id="homeRuns" name="homeRuns" oninput="validateNumberInput(Event)"><br>
+
+    <label for="runsBattedIn">Runs Batted In:</label>
+    <input type="text" id="runsBattedIn" name="runsBattedIn" oninput="validateNumberInput(Event)"><br>
+
+    <label for="stolenBases">Stolen Bases:</label>
+    <input type="text" id="stolenBases" name="stolenBases" oninput="validateNumberInput(Event)"><br>
+
+    <label for="caughtStealing">Caught Stealing:</label>
+    <input type="text" id="caughtStealing" name="caughtStealing" oninput="validateNumberInput(Event)"><br>
+
+    <label for="walks">Walks:</label>
+    <input type="text" id="walks" name="walks" oninput="validateNumberInput(Event)"><br>
+
+    <label for="batterHitByPitch">Hit by Pitch:</label>
+    <input type="text" id="batterHitByPitch" name="hitByPitch" oninput="validateNumberInput(Event)"><br>
+
+    <label for="batterStrikeouts">Strikeouts:</label>
+    <input type="text" id="batterStrikeouts" name="strikeouts" oninput="validateNumberInput(Event)"><br>
+
+    <label for="errors">Errors:</label>
+    <input type="text" id="errors" name="errors" oninput="validateNumberInput(Event)"><br>
+
+    <button type="submit">Save Batter</button>
+</form>
+
+<hr>
+
+<!-- 투수 추가 및 수정 -->
+<h2>Pitcher (투수)</h2>
+<form action="/player/save-pitcher" method="post">
+    <label for="pitcherName">Name:</label>
+    <input type="text" id="pitcherName" name="playerName" required><br>
+
+    <label for="pitcherTeam">Team:</label>
+    <input type="text" id="pitcherTeam" name="team" required><br>
+
+    <label for="pitcherGamesPlayed">Games Played:</label>
+    <input type="text" id="pitcherGamesPlayed" name="gamesPlayed" oninput="validateNumberInput(Event)"><br>
+
+    <label for="inningsPitched">Innings Pitched:</label>
+    <input type="text" id="inningsPitched" name="inningsPitched" oninput="validateNumberInput(Event, true)"><br>
+
+    <label for="wins">Wins:</label>
+    <input type="text" id="wins" name="wins" oninput="validateNumberInput(Event)"><br>
+
+    <label for="losses">Losses:</label>
+    <input type="text" id="losses" name="losses" oninput="validateNumberInput(Event)"><br>
+
+    <label for="saves">Saves:</label>
+    <input type="text" id="saves" name="saves" oninput="validateNumberInput(Event)"><br>
+
+    <label for="holds">Holds:</label>
+    <input type="text" id="holds" name="holds" oninput="validateNumberInput(Event)"><br>
+
+    <label for="hitsAllowed">Hits Allowed:</label>
+    <input type="text" id="hitsAllowed" name="hitsAllowed" oninput="validateNumberInput(Event)"><br>
+
+    <label for="homeRunsAllowed">Home Runs Allowed:</label>
+    <input type="text" id="homeRunsAllowed" name="homeRunsAllowed" oninput="validateNumberInput(Event)"><br>
+
+    <label for="walksAllowed">Walks Allowed:</label>
+    <input type="text" id="walksAllowed" name="walksAllowed" oninput="validateNumberInput(Event)"><br>
+
+    <label for="pitcherHitByPitch">Hit by Pitch:</label>
+    <input type="text" id="pitcherHitByPitch" name="hitByPitch" oninput="validateNumberInput(Event)"><br>
+
+    <label for="pitcherStrikeouts">Strikeouts:</label>
+    <input type="text" id="pitcherStrikeouts" name="strikeouts" oninput="validateNumberInput(Event)"><br>
+
+    <label for="runsAllowed">Runs Allowed:</label>
+    <input type="text" id="runsAllowed" name="runsAllowed" oninput="validateNumberInput(Event)"><br>
+
+    <button type="submit">Save Pitcher</button>
+</form>
+
+<br>
+<a href="/">Back to Main</a>
+</body>
+</html>

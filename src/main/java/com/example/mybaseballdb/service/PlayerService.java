@@ -21,8 +21,14 @@ public class PlayerService {
     public Optional<Batter> findBatterByName(String playerName) {
         return batterRepository.findById(playerName);
     }
+    public Batter saveBatter(Batter batter) {
+        return batterRepository.save(batter);
+    }
 
     public Optional<Pitcher> findPitcherByName(String playerName) {
         return pitcherRepository.findById(playerName);
+    }
+    public Pitcher savePitcher(Pitcher pitcher) {
+        return pitcherRepository.save(pitcher);
     }
 }
