@@ -11,7 +11,7 @@ public class Batter {
     private String playerName;
     private String team;
     private Integer gamesPlayed;
-    private Integer plateAppearances;
+    private Integer atBats;
     private Integer hits;
     private Integer doubles;
     private Integer triples;
@@ -23,6 +23,8 @@ public class Batter {
     private Integer hitByPitch;
     private Integer strikeouts;
     private Integer errors;
+    private Integer sacrificeBunts;
+    private Integer sacrificeFlies;
     private Float battingAverage;
     private Float onBasePercentage;
     private Float sluggingPercentage;

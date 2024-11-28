@@ -14,7 +14,7 @@
     <!-- If the player is a Batter -->
     <div th:if="${type == 'Batter'}">
         <p><b>Games Played:</b> <span th:text="${player.gamesPlayed}"></span></p>
-        <p><b>Plate Appearances:</b> <span th:text="${player.plateAppearances}"></span></p>
+        <p><b>At Bats:</b> <span th:text="${player.atBats}"></span></p>
         <p><b>Hits:</b> <span th:text="${player.hits}"></span></p>
         <p><b>Doubles:</b> <span th:text="${player.doubles}"></span></p>
         <p><b>Triples:</b> <span th:text="${player.triples}"></span></p>
@@ -24,6 +24,8 @@
         <p><b>Caught Stealing:</b> <span th:text="${player.caughtStealing}"></span></p>
         <p><b>Walks:</b> <span th:text="${player.walks}"></span></p>
         <p><b>Hit by Pitch:</b> <span th:text="${player.hitByPitch}"></span></p>
+        <p><b>Sacrifice Bunts:</b> <span th:text="${player.sacrificeBunts}"></span></p>
+        <p><b>Sacrifice Flies:</b> <span th:text="${player.sacrificeFlies}"></span></p>
         <p><b>Strikeouts:</b> <span th:text="${player.strikeouts}"></span></p>
         <p><b>Errors:</b> <span th:text="${player.errors}"></span></p>
         <p><b>Batting Average:</b> <span th:text="${player.battingAverage}"></span></p>
