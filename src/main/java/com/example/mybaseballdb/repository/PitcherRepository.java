@@ -10,6 +10,15 @@ import java.util.List;
 public interface PitcherRepository extends JpaRepository<Pitcher, String> {
     @Query(value = """
         SELECT 
+            p.player_name, p.team, p.games_played, p.earned_run_average, p.wins, p.losses, p.saves, p.holds
+        FROM Pitcher p
+        WHERE p.player_name = :playerName
+        """, nativeQuery = true)
+    List<Object[]> getPitcherSummary(@Param("playerName") String playerName);
+
+
+    @Query(value = """
+        SELECT 
             player_name, team, innings_pitched, wins, losses, saves, holds, earned_run_average, whip, k_per_bb,
             RANK() OVER (ORDER BY CASE 
             WHEN :stat = 'innings_pitched' THEN innings_pitched

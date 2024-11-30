@@ -5,60 +5,182 @@
 </head>
 <body>
 <h1>Player Info</h1>
-<div th:if="${player}">
-    <h2 th:text="${type} + ' Details'"></h2>
 
-    <p><b>Name:</b> <span th:text="${player.playerName}"></span></p>
-    <p><b>Team:</b> <span th:text="${player.team}"></span></p>
+<!-- 간략 정보 -->
+<div th:if="${!detailed}">
+    <h2 th:text="'Player Summary - ' + ${type}"></h2>
+    <table border="1" th:if="${type == 'Batter'}">
+        <thead>
+        <tr>
+            <th>이름</th>
+            <th>팀</th>
+            <th>게임 수</th>
+            <th>안타</th>
+            <th>홈런</th>
+            <th>타율</th>
+            <th>OPS</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="summary : ${playerSummary}">
+            <td th:text="${summary[0]}"></td>
+            <td th:text="${summary[1]}"></td>
+            <td th:text="${summary[2]}"></td>
+            <td th:text="${summary[3]}"></td>
+            <td th:text="${summary[4]}"></td>
+            <td th:text="${summary[5]}"></td>
+            <td th:text="${summary[6]}"></td>
+        </tr>
+        </tbody>
+    </table>
 
-    <!-- If the player is a Batter -->
+    <table border="1" th:if="${type == 'Pitcher'}">
+        <thead>
+        <tr>
+            <th>이름</th>
+            <th>팀</th>
+            <th>게임 수</th>
+            <th>ERA</th>
+            <th>승</th>
+            <th>패</th>
+            <th>세이브</th>
+            <th>홀드</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="summary : ${playerSummary}">
+            <td th:text="${summary[0]}"></td>
+            <td th:text="${summary[1]}"></td>
+            <td th:text="${summary[2]}"></td>
+            <td th:text="${summary[3]}"></td>
+            <td th:text="${summary[4]}"></td>
+            <td th:text="${summary[5]}"></td>
+            <td th:text="${summary[6]}"></td>
+            <td th:text="${summary[7]}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="'/player/result?name=' + ${playerSummary[0][0]} + '&detailed=true'">자세히 보기</a>
+</div>
+
+<!-- 자세히 보기 -->
+<div th:if="${detailed}">
+    <h2 th:text="'Player Details - ' + ${type}"></h2>
+
+    <!-- 타자 상세 정보 -->
     <div th:if="${type == 'Batter'}">
-        <p><b>Games Played:</b> <span th:text="${player.gamesPlayed}"></span></p>
-        <p><b>At Bats:</b> <span th:text="${player.atBats}"></span></p>
-        <p><b>Hits:</b> <span th:text="${player.hits}"></span></p>
-        <p><b>Doubles:</b> <span th:text="${player.doubles}"></span></p>
-        <p><b>Triples:</b> <span th:text="${player.triples}"></span></p>
-        <p><b>Home Runs:</b> <span th:text="${player.homeRuns}"></span></p>
-        <p><b>Runs Batted In:</b> <span th:text="${player.runsBattedIn}"></span></p>
-        <p><b>Stolen Bases:</b> <span th:text="${player.stolenBases}"></span></p>
-        <p><b>Caught Stealing:</b> <span th:text="${player.caughtStealing}"></span></p>
-        <p><b>Walks:</b> <span th:text="${player.walks}"></span></p>
-        <p><b>Hit by Pitch:</b> <span th:text="${player.hitByPitch}"></span></p>
-        <p><b>Sacrifice Bunts:</b> <span th:text="${player.sacrificeBunts}"></span></p>
-        <p><b>Sacrifice Flies:</b> <span th:text="${player.sacrificeFlies}"></span></p>
-        <p><b>Strikeouts:</b> <span th:text="${player.strikeouts}"></span></p>
-        <p><b>Errors:</b> <span th:text="${player.errors}"></span></p>
-        <p><b>Batting Average:</b> <span th:text="${player.battingAverage}"></span></p>
-        <p><b>On Base Percentage:</b> <span th:text="${player.onBasePercentage}"></span></p>
-        <p><b>Slugging Percentage:</b> <span th:text="${player.sluggingPercentage}"></span></p>
-        <p><b>OPS:</b> <span th:text="${player.ops}"></span></p>
+        <h3>타자 상세 정보</h3>
+        <table border="1">
+            <thead>
+            <tr>
+                <th>이름</th>
+                <th>팀</th>
+                <th>게임 수</th>
+                <th>타수</th>
+                <th>안타</th>
+                <th>2루타</th>
+                <th>3루타</th>
+                <th>홈런</th>
+                <th>타점</th>
+                <th>도루</th>
+                <th>도루 실패</th>
+                <th>볼넷</th>
+                <th>사구</th>
+                <th>삼진</th>
+                <th>실책</th>
+                <th>희생 번트</th>
+                <th>희생 플라이</th>
+                <th>타율</th>
+                <th>출루율</th>
+                <th>장타율</th>
+                <th>OPS</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td th:text="${player.playerName}"></td>
+                <td th:text="${player.team}"></td>
+                <td th:text="${player.gamesPlayed}"></td>
+                <td th:text="${player.atBats}"></td>
+                <td th:text="${player.hits}"></td>
+                <td th:text="${player.doubles}"></td>
+                <td th:text="${player.triples}"></td>
+                <td th:text="${player.homeRuns}"></td>
+                <td th:text="${player.runsBattedIn}"></td>
+                <td th:text="${player.stolenBases}"></td>
+                <td th:text="${player.caughtStealing}"></td>
+                <td th:text="${player.walks}"></td>
+                <td th:text="${player.hitByPitch}"></td>
+                <td th:text="${player.strikeouts}"></td>
+                <td th:text="${player.errors}"></td>
+                <td th:text="${player.sacrificeBunts}"></td>
+                <td th:text="${player.sacrificeFlies}"></td>
+                <td th:text="${player.battingAverage}"></td>
+                <td th:text="${player.onBasePercentage}"></td>
+                <td th:text="${player.sluggingPercentage}"></td>
+                <td th:text="${player.ops}"></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 
-    <!-- If the player is a Pitcher -->
+    <!-- 투수 상세 정보 -->
     <div th:if="${type == 'Pitcher'}">
-        <p><b>Games Played:</b> <span th:text="${player.gamesPlayed}"></span></p>
-        <p><b>Innings Pitched:</b> <span th:text="${player.inningsPitched}"></span></p>
-        <p><b>Wins:</b> <span th:text="${player.wins}"></span></p>
-        <p><b>Losses:</b> <span th:text="${player.losses}"></span></p>
-        <p><b>Saves:</b> <span th:text="${player.saves}"></span></p>
-        <p><b>Holds:</b> <span th:text="${player.holds}"></span></p>
-        <p><b>Hits Allowed:</b> <span th:text="${player.hitsAllowed}"></span></p>
-        <p><b>Home Runs Allowed:</b> <span th:text="${player.homeRunsAllowed}"></span></p>
-        <p><b>Walks Allowed:</b> <span th:text="${player.walksAllowed}"></span></p>
-        <p><b>Hit by Pitch:</b> <span th:text="${player.hitByPitch}"></span></p>
-        <p><b>Strikeouts:</b> <span th:text="${player.strikeouts}"></span></p>
-        <p><b>Runs Allowed:</b> <span th:text="${player.runsAllowed}"></span></p>
-        <p><b>Earned Runs:</b> <span th:text="${player.earnedRuns}"></span></p>
-        <p><b>Earned Run Average:</b> <span th:text="${player.earnedRunAverage}"></span></p>
-        <p><b>WHIP:</b> <span th:text="${player.whip}"></span></p>
-        <p><b>K/BB:</b> <span th:text="${player.kPerBb}"></span></p>
+        <h3>투수 상세 정보</h3>
+        <table border="1">
+            <thead>
+            <tr>
+                <th>이름</th>
+                <th>팀</th>
+                <th>게임 수</th>
+                <th>이닝</th>
+                <th>승</th>
+                <th>패</th>
+                <th>세이브</th>
+                <th>홀드</th>
+                <th>피안타</th>
+                <th>피홈런</th>
+                <th>볼넷</th>
+                <th>사구</th>
+                <th>삼진</th>
+                <th>실점</th>
+                <th>자책점</th>
+                <th>방어율</th>
+                <th>WHIP</th>
+                <th>K/BB</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td th:text="${player.playerName}"></td>
+                <td th:text="${player.team}"></td>
+                <td th:text="${player.gamesPlayed}"></td>
+                <td th:text="${player.inningsPitched}"></td>
+                <td th:text="${player.wins}"></td>
+                <td th:text="${player.losses}"></td>
+                <td th:text="${player.saves}"></td>
+                <td th:text="${player.holds}"></td>
+                <td th:text="${player.hitsAllowed}"></td>
+                <td th:text="${player.homeRunsAllowed}"></td>
+                <td th:text="${player.walksAllowed}"></td>
+                <td th:text="${player.hitByPitch}"></td>
+                <td th:text="${player.strikeouts}"></td>
+                <td th:text="${player.runsAllowed}"></td>
+                <td th:text="${player.earnedRuns}"></td>
+                <td th:text="${player.earnedRunAverage}"></td>
+                <td th:text="${player.whip}"></td>
+                <td th:text="${player.kPerBb}"></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
+    <a th:href="'/player/result?name=' + ${player.playerName}">간략히 보기</a>
 </div>
 
 <div th:if="${message}">
     <p th:text="${message}"></p>
 </div>
-
 <a href="/player/search">Search Another Player</a>
+<a href="/">메인 화면으로 돌아가기</a>
 </body>
 </html>

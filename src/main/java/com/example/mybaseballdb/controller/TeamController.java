@@ -21,16 +21,23 @@ public class TeamController {
 
     @GetMapping("/team")
     public String getTeamInfo(
-            @RequestParam(defaultValue = "두산 베어스") String teamName, // 기본값 설정
+            @RequestParam(defaultValue = "두산 베어스") String teamName,
             Model model) {
+        // 팀과 선수 정보 가져오기
         List<Object[]> teamData = teamService.getTeamInfoWithTopPlayers(teamName);
-
         if (!teamData.isEmpty()) {
             Object[] teamInfo = teamData.get(0); // 팀 정보는 첫 번째 데이터에서 가져옴
             model.addAttribute("teamInfo", teamInfo);
         }
-
         model.addAttribute("players", teamData); // 선수 정보
+
+        // 야구장 정보 가져오기
+        List<Object[]> stadiumData = teamService.getTeamAndStadiumInfo(teamName);
+        if (!stadiumData.isEmpty()) {
+            Object[] stadiumInfo = stadiumData.get(0); // 야구장 정보
+            model.addAttribute("stadiumInfo", stadiumInfo);
+        }
+
         model.addAttribute("teamName", teamName);
         return "team";
     }

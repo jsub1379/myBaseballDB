@@ -10,6 +10,15 @@ import java.util.List;
 public interface BatterRepository extends JpaRepository<Batter, String> {
     @Query(value = """
         SELECT 
+            b.player_name, b.team, b.games_played, b.hits, b.home_runs, b.batting_average, b.ops
+        FROM Batter b
+        WHERE b.player_name = :playerName
+        """, nativeQuery = true)
+    List<Object[]> getBatterSummary(@Param("playerName") String playerName);
+
+
+    @Query(value = """
+        SELECT 
             player_name, team, hits, home_runs, runs_batted_in, stolen_bases, batting_average, on_base_percentage, slugging_percentage, ops,
             RANK() OVER (ORDER BY CASE 
             WHEN :stat = 'hits' THEN hits

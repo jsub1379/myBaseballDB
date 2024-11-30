@@ -6,6 +6,7 @@ import com.example.mybaseballdb.repository.BatterRepository;
 import com.example.mybaseballdb.repository.PitcherRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,4 +32,13 @@ public class PlayerService {
     public Pitcher savePitcher(Pitcher pitcher) {
         return pitcherRepository.save(pitcher);
     }
+    public List<Object[]> getBatterSummary(String playerName) {
+        return batterRepository.getBatterSummary(playerName);
+    }
+
+    public List<Object[]> getPitcherSummary(String playerName) {
+        return pitcherRepository.getPitcherSummary(playerName);
+    }
+
+
 }

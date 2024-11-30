@@ -29,22 +29,34 @@ public class PlayerController {
 
     // 검색 결과 페이지
     @GetMapping("/player/result")
-    public String getPlayerInfo(@RequestParam String name, Model model) {
+    public String getPlayerInfo(@RequestParam String name, @RequestParam(defaultValue = "false") boolean detailed, Model model) {
         var batter = playerService.findBatterByName(name);
         var pitcher = playerService.findPitcherByName(name);
 
         if (batter.isPresent()) {
-            model.addAttribute("player", batter.get());
+            if (detailed) {
+                model.addAttribute("player", batter.get());
+            } else {
+                model.addAttribute("playerSummary", playerService.getBatterSummary(name));
+            }
             model.addAttribute("type", "Batter");
         } else if (pitcher.isPresent()) {
-            model.addAttribute("player", pitcher.get());
+            if (detailed) {
+                model.addAttribute("player", pitcher.get());
+            } else {
+                model.addAttribute("playerSummary", playerService.getPitcherSummary(name));
+            }
             model.addAttribute("type", "Pitcher");
         } else {
-            model.addAttribute("message", "Player not found");
+            // 메시지를 추가하고 search 페이지로 리다이렉트
+            model.addAttribute("message", "선수를 찾을 수 없습니다.");
+            return "search"; // search.html로 리다이렉트
         }
 
+        model.addAttribute("detailed", detailed);
         return "result";
     }
+
 
     // 추가 및 수정 페이지
     @GetMapping("/player/add-edit")

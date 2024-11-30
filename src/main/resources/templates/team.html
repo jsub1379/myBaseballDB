@@ -15,6 +15,11 @@
         <option value="삼성 라이온즈">삼성 라이온즈</option>
         <option value="SSG 랜더스">SSG 랜더스</option>
         <option value="키움 히어로즈">키움 히어로즈</option>
+        <option value="키움 히어로즈">NC 다이노스</option>
+        <option value="키움 히어로즈">롯데 자이언츠</option>
+        <option value="키움 히어로즈">KIA 타이거즈</option>
+        <option value="키움 히어로즈">한화 이글스</option>
+        <option value="키움 히어로즈">KT 위즈</option>
     </select>
     <button type="submit">검색</button>
 </form>
@@ -55,26 +60,49 @@
         </tbody>
     </table>
 
+
+    <!-- 야구장 정보 출력 -->
+    <div th:if="${stadiumInfo != null}">
+        <h2>야구장 정보</h2>
+        <table border="1">
+            <thead>
+            <tr>
+                <th>좌석 수</th>
+                <th>표 가격</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td th:text="${stadiumInfo[4]}"></td> <!-- Seating Capacity -->
+                <td th:text="${stadiumInfo[5]}"></td> <!-- Ticket Price -->
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+
     <h2>상위 5명의 선수</h2>
     <table border="1">
         <thead>
         <tr>
             <th>타자 이름</th>
-            <th>경기 수 (타자)</th>
+            <th>OPS</th>
             <th>투수 이름</th>
-            <th>경기 수 (투수)</th>
+            <th>ERA</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="player : ${players}">
-            <td th:text="${player[12]}"></td> <!-- Batter Name -->
-            <td th:text="${player[13]}"></td> <!-- Batter Games Played -->
-            <td th:text="${player[10]}"></td> <!-- Pitcher Name -->
-            <td th:text="${player[11]}"></td> <!-- Pitcher Games Played -->
+            <td th:text="${player[13]}"></td> <!-- Batter Name -->
+            <td th:text="${player[14]}"></td> <!-- OPS -->
+            <td th:text="${player[11]}"></td> <!-- Pitcher Name -->
+            <td th:text="${player[12]}"></td> <!-- ERA -->
         </tr>
         </tbody>
     </table>
 </div>
-
+<a href="/">메인 화면으로 돌아가기</a>
 </body>
 </html>

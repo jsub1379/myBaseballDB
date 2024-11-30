@@ -10,6 +10,20 @@ import java.util.List;
 public interface TeamRepository extends CrudRepository<Team, String> {
 
     @Query(value = """
+        SELECT 
+            t.team_name AS teamName,
+            t.home_stadium AS homeStadium,
+            t.founding_year AS foundingYear,
+            t.championships AS championships,
+            s.seating_capacity AS seatingCapacity,
+            s.ticket_price AS ticketPrice
+        FROM Team t
+        JOIN Stadium s ON t.home_stadium = s.stadium_name
+        WHERE t.team_name = :teamName
+        """, nativeQuery = true)
+    List<Object[]> getTeamAndStadiumInfo(@Param("teamName") String teamName);
+
+    @Query(value = """
             SELECT 
                 t.team_name AS teamName,
                 t.home_stadium AS homeStadium,
@@ -23,14 +37,14 @@ public interface TeamRepository extends CrudRepository<Team, String> {
                 t.team_whip AS teamWhip,
                 t.team_k_per_bb AS teamKPerBB,
                 p.player_name AS pitcherName,
-                p.games_played AS pitcherGamesPlayed,
+                p.earned_run_average AS earningRunAverage,
                 b.player_name AS batterName,
-                b.games_played AS batterGamesPlayed
+                b.ops AS ops
             FROM Team t
             LEFT JOIN Pitcher p ON t.team_name = p.team
             LEFT JOIN Batter b ON t.team_name = b.team
             WHERE t.team_name = :teamName
-            ORDER BY p.games_played DESC, b.games_played DESC
+            ORDER BY p.earned_run_average ASC, b.ops DESC
             LIMIT 5
             """, nativeQuery = true)
     List<Object[]> getTeamInfoWithTopPlayers(@Param("teamName") String teamName);
