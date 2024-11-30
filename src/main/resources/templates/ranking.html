@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ranking Page</title>
+    <script>
+        // JavaScript 함수: 타입에 따라 스탯 옵션 변경
+        function updateStatOptions() {
+            const typeSelect = document.getElementById("type");
+            const statSelect = document.getElementById("stat");
+
+            // Clear existing options
+            statSelect.innerHTML = "";
+
+            if (typeSelect.value === "batter") {
+                // 타자 스탯 옵션
+                const batterStats = [
+                    { value: "hits", text: "안타" },
+                    { value: "home_runs", text: "홈런" },
+                    { value: "runs_batted_in", text: "타점" },
+                    { value: "stolen_bases", text: "도루" },
+                    { value: "batting_average", text: "타율" },
+                    { value: "on_base_percentage", text: "출루율" },
+                    { value: "slugging_percentage", text: "장타율" },
+                    { value: "ops", text: "OPS" }
+                ];
+                batterStats.forEach(stat => {
+                    const option = document.createElement("option");
+                    option.value = stat.value;
+                    option.text = stat.text;
+                    statSelect.appendChild(option);
+                });
+            } else if (typeSelect.value === "pitcher") {
+                // 투수 스탯 옵션
+                const pitcherStats = [
+                    { value: "innings_pitched", text: "이닝" },
+                    { value: "wins", text: "승" },
+                    { value: "losses", text: "패" },
+                    { value: "saves", text: "세이브" },
+                    { value: "holds", text: "홀드" },
+                    { value: "earned_run_average", text: "ERA" },
+                    { value: "whip", text: "WHIP" },
+                    { value: "k_per_bb", text: "K/BB" }
+                ];
+                pitcherStats.forEach(stat => {
+                    const option = document.createElement("option");
+                    option.value = stat.value;
+                    option.text = stat.text;
+                    statSelect.appendChild(option);
+                });
+            }
+        }
+    </script>
+</head>
+
+
+<body>
+<h1>Ranking Page</h1>
+<form action="/ranking" method="get">
+    <label for="type">선수 유형:</label>
+    <select id="type" name="type" onchange="updateStatOptions()">
+        <option value="batter">타자</option>
+        <option value="pitcher">투수</option>
+    </select>
+
+    <label for="stat">스탯 선택:</label>
+    <select id="stat" name="stat">
+        <option value="hits">안타</option>
+        <option value="home_runs">홈런</option>
+        <option value="runs_batted_in">타점</option>
+        <option value="stolen_bases">도루</option>
+        <option value="batting_average">타율</option>
+        <option value="on_base_percentage">출루율</option>
+        <option value="slugging_percentage">장타율</option>
+        <option value="ops">OPS</option>
+    </select>
+
+    <label for="order">정렬:</label>
+    <select id="order" name="order">
+        <option value="asc">오름차순</option>
+        <option value="desc">내림차순</option>
+    </select>
+
+    <button type="submit">랭킹 보기</button>
+</form>
+
+
+<hr>
+
+<!-- 랭킹 결과 표시 -->
+<h2 th:text="'Top 10 Players of ' + ${stat}"></h2>
+<table border="1" th:if="${ranking != null}">
+    <thead>
+    <tr th:if="${type == 'batter'}">
+        <th>순위</th>
+        <th>선수 이름</th>
+        <th>팀</th>
+        <th>안타</th>
+        <th>홈런</th>
+        <th>타점</th>
+        <th>도루</th>
+        <th>타율</th>
+        <th>출루율</th>
+        <th>장타율</th>
+        <th>OPS</th>
+    </tr>
+    <tr th:if="${type == 'pitcher'}">
+        <th>순위</th>
+        <th>선수 이름</th>
+        <th>팀</th>
+        <th>이닝</th>
+        <th>승</th>
+        <th>패</th>
+        <th>세이브</th>
+        <th>홀드</th>
+        <th>ERA</th>
+        <th>WHIP</th>
+        <th>K/BB</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="player, iterStat : ${ranking}">
+        <td th:text="${iterStat.index + 1}"></td>
+        <td th:text="${player[0]}"></td>
+        <td th:text="${player[1]}"></td>
+        <td th:text="${player[2]}"></td>
+        <td th:text="${player[3]}"></td>
+        <td th:text="${player[4]}"></td>
+        <td th:text="${player[5]}"></td>
+        <td th:text="${player[6]}"></td>
+        <td th:text="${player[7]}"></td>
+        <td th:text="${player[8]}"></td>
+        <td th:text="${player[9]}"></td>
+
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

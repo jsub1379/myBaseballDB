@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Team Information</title>
+</head>
+<body>
+<h1>팀 정보</h1>
+
+<!-- 팀 선택 폼 -->
+<form action="/team" method="get">
+    <label for="teamName">팀 선택:</label>
+    <select id="teamName" name="teamName">
+        <option value="두산 베어스" selected>두산 베어스</option>
+        <option value="LG 트윈스">LG 트윈스</option>
+        <option value="삼성 라이온즈">삼성 라이온즈</option>
+        <option value="SSG 랜더스">SSG 랜더스</option>
+        <option value="키움 히어로즈">키움 히어로즈</option>
+    </select>
+    <button type="submit">검색</button>
+</form>
+
+<hr>
+
+<!-- 팀 정보 출력 -->
+<div th:if="${teamInfo != null}">
+    <h2 th:text="'팀 이름: ' + ${teamName}"></h2>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>홈구장</th>
+            <th>창단년도</th>
+            <th>우승 횟수</th>
+            <th>팀 타율</th>
+            <th>출루율</th>
+            <th>장타율</th>
+            <th>OPS</th>
+            <th>방어율</th>
+            <th>WHIP</th>
+            <th>K/BB</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${teamInfo[1]}"></td> <!-- Home Stadium -->
+            <td th:text="${teamInfo[2]}"></td> <!-- Founding Year -->
+            <td th:text="${teamInfo[3]}"></td> <!-- Championships -->
+            <td th:text="${teamInfo[4]}"></td> <!-- Team Batting Average -->
+            <td th:text="${teamInfo[5]}"></td> <!-- Team On Base Percentage -->
+            <td th:text="${teamInfo[6]}"></td> <!-- Team Slugging Percentage -->
+            <td th:text="${teamInfo[7]}"></td> <!-- Team OPS -->
+            <td th:text="${teamInfo[8]}"></td> <!-- Team Earned Run Average -->
+            <td th:text="${teamInfo[9]}"></td> <!-- Team WHIP -->
+            <td th:text="${teamInfo[10]}"></td> <!-- Team K/BB -->
+        </tr>
+        </tbody>
+    </table>
+
+    <h2>상위 5명의 선수</h2>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>타자 이름</th>
+            <th>경기 수 (타자)</th>
+            <th>투수 이름</th>
+            <th>경기 수 (투수)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="player : ${players}">
+            <td th:text="${player[12]}"></td> <!-- Batter Name -->
+            <td th:text="${player[13]}"></td> <!-- Batter Games Played -->
+            <td th:text="${player[10]}"></td> <!-- Pitcher Name -->
+            <td th:text="${player[11]}"></td> <!-- Pitcher Games Played -->
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
