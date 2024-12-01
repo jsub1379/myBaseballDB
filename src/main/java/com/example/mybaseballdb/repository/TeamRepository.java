@@ -48,4 +48,31 @@ public interface TeamRepository extends CrudRepository<Team, String> {
             LIMIT 5
             """, nativeQuery = true)
     List<Object[]> getTeamInfoWithTopPlayers(@Param("teamName") String teamName);
+    @Query(value = """
+        SELECT 
+            p.player_name AS playerName,
+            p.earned_run_average AS stat,
+            '투수' AS playerType
+        FROM Team t
+        JOIN Pitcher p ON t.team_name = p.team
+        WHERE t.team_name = :teamName
+        ORDER BY p.earned_run_average ASC
+        LIMIT 5
+        """, nativeQuery = true)
+    List<Object[]> getTopPitchersWithJoin(@Param("teamName") String teamName);
+
+    @Query(value = """
+        SELECT 
+            b.player_name AS playerName,
+            b.ops AS stat,
+            '타자' AS playerType
+        FROM Team t
+        JOIN Batter b ON t.team_name = b.team
+        WHERE t.team_name = :teamName
+        ORDER BY b.ops DESC
+        LIMIT 5
+        """, nativeQuery = true)
+    List<Object[]> getTopBattersWithJoin(@Param("teamName") String teamName);
+
+
 }

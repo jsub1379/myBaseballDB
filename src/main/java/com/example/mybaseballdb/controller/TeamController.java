@@ -37,6 +37,13 @@ public class TeamController {
             Object[] stadiumInfo = stadiumData.get(0); // 야구장 정보
             model.addAttribute("stadiumInfo", stadiumInfo);
         }
+        // 상위 5명의 투수
+        List<Object[]> topPitchers = teamService.getTopPitchersWithJoin(teamName);
+        model.addAttribute("topPitchers", topPitchers);
+
+        // 상위 5명의 타자
+        List<Object[]> topBatters = teamService.getTopBattersWithJoin(teamName);
+        model.addAttribute("topBatters", topBatters);
 
         model.addAttribute("teamName", teamName);
         return "team";

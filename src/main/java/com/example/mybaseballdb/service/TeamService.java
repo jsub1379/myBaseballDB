@@ -23,5 +23,13 @@ public class TeamService {
     public List<Object[]> getTeamAndStadiumInfo(String teamName) {
         return teamRepository.getTeamAndStadiumInfo(teamName);
     }
+    public List<Object[]> getTopPitchersWithJoin(String teamName) {
+        return teamRepository.getTopPitchersWithJoin(teamName);
+    }
+
+    public List<Object[]> getTopBattersWithJoin(String teamName) {
+        return teamRepository.getTopBattersWithJoin(teamName);
+    }
+
 
 }

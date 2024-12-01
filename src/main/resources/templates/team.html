@@ -84,22 +84,34 @@
     <hr>
 
 
-    <h2>상위 5명의 선수</h2>
+    <h2>상위 5명의 타자</h2>
     <table border="1">
         <thead>
         <tr>
             <th>타자 이름</th>
             <th>OPS</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="batter : ${topBatters}">
+            <td th:text="${batter[0]}"></td> <!-- 타자 이름 -->
+            <td th:text="${batter[1]}"></td> <!-- OPS -->
+        </tr>
+        </tbody>
+    </table>
+
+    <h2>상위 5명의 투수</h2>
+    <table border="1">
+        <thead>
+        <tr>
             <th>투수 이름</th>
             <th>ERA</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="player : ${players}">
-            <td th:text="${player[13]}"></td> <!-- Batter Name -->
-            <td th:text="${player[14]}"></td> <!-- OPS -->
-            <td th:text="${player[11]}"></td> <!-- Pitcher Name -->
-            <td th:text="${player[12]}"></td> <!-- ERA -->
+        <tr th:each="pitcher : ${topPitchers}">
+            <td th:text="${pitcher[0]}"></td> <!-- 투수 이름 -->
+            <td th:text="${pitcher[1]}"></td> <!-- ERA -->
         </tr>
         </tbody>
     </table>
