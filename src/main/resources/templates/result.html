@@ -2,14 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
-    <title>Player Info</title>
+    <title>선수 정보</title>
 </head>
 <body>
-<h1>Player Info</h1>
+<h1>선수 정보</h1>
 
 <!-- 간략 정보 -->
 <div th:if="${!detailed}">
-    <h2 th:text="'Player Summary - ' + ${type}"></h2>
     <table border="1" th:if="${type == 'Batter'}">
         <thead>
         <tr>
@@ -66,11 +65,9 @@
 
 <!-- 자세히 보기 -->
 <div th:if="${detailed}">
-    <h2 th:text="'Player Details - ' + ${type}"></h2>
 
     <!-- 타자 상세 정보 -->
     <div th:if="${type == 'Batter'}">
-        <h3>타자 상세 정보</h3>
         <table border="1">
             <thead>
             <tr>
@@ -127,7 +124,6 @@
 
     <!-- 투수 상세 정보 -->
     <div th:if="${type == 'Pitcher'}">
-        <h3>투수 상세 정보</h3>
         <table border="1">
             <thead>
             <tr>
@@ -181,7 +177,8 @@
 <div th:if="${message}">
     <p th:text="${message}"></p>
 </div>
-<a href="/player/search">Search Another Player</a>
+<a href="/player/search">다른 선수 검색</a>
+<br>
 <a href="/">메인 화면으로 돌아가기</a>
 </body>
 </html>

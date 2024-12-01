@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
-    <title>Add or Edit Player</title>
+    <title>선수 추가 또는 수정</title>
     <script>
         // 숫자 입력 제어 함수 (정수와 실수 모두 가능)
         function validateNumberInput(Event, isFloat = false) {
@@ -12,117 +12,116 @@
     </script>
 </head>
 <body>
-<h1>Add or Edit Player</h1>
+<h1>선수 추가 또는 수정</h1>
 
+<a href="/">메인 화면으로 돌아가기</a>
+<br> <br>
 <!-- 타자 추가 및 수정 -->
-<h2>Batter (타자)</h2>
+<h2>타자</h2>
 <form action="/player/save-batter" method="post">
-    <label for="batterName">Name:</label>
+    <label for="batterName">이름:</label>
     <input type="text" id="batterName" name="playerName" required><br>
 
-    <label for="batterTeam">Team:</label>
+    <label for="batterTeam">팀:</label>
     <input type="text" id="batterTeam" name="team" ><br>
 
-    <label for="batterGamesPlayed">Games Played:</label>
+    <label for="batterGamesPlayed">경기 수:</label>
     <input type="text" id="batterGamesPlayed" name="gamesPlayed" oninput="validateNumberInput(Event)"><br>
 
-    <label for="atBats">At Bats:</label>
+    <label for="atBats">타수:</label>
     <input type="text" id="atBats" name="atBats" oninput="validateNumberInput(Event)"><br>
 
-    <label for="hits">Hits:</label>
+    <label for="hits">안타:</label>
     <input type="text" id="hits" name="hits" oninput="validateNumberInput(Event)"><br>
 
-    <label for="doubles">Doubles:</label>
+    <label for="doubles">2루타:</label>
     <input type="text" id="doubles" name="doubles" oninput="validateNumberInput(Event)"><br>
 
-    <label for="triples">Triples:</label>
+    <label for="triples">3루타:</label>
     <input type="text" id="triples" name="triples" oninput="validateNumberInput(Event)"><br>
 
-    <label for="homeRuns">Home Runs:</label>
+    <label for="homeRuns">홈런:</label>
     <input type="text" id="homeRuns" name="homeRuns" oninput="validateNumberInput(Event)"><br>
 
-    <label for="runsBattedIn">Runs Batted In:</label>
+    <label for="runsBattedIn">타점:</label>
     <input type="text" id="runsBattedIn" name="runsBattedIn" oninput="validateNumberInput(Event)"><br>
 
-    <label for="stolenBases">Stolen Bases:</label>
+    <label for="stolenBases">도루:</label>
     <input type="text" id="stolenBases" name="stolenBases" oninput="validateNumberInput(Event)"><br>
 
-    <label for="caughtStealing">Caught Stealing:</label>
+    <label for="caughtStealing">도루 실패:</label>
     <input type="text" id="caughtStealing" name="caughtStealing" oninput="validateNumberInput(Event)"><br>
 
-    <label for="walks">Walks:</label>
+    <label for="walks">볼넷:</label>
     <input type="text" id="walks" name="walks" oninput="validateNumberInput(Event)"><br>
 
-    <label for="batterHitByPitch">Hit by Pitch:</label>
+    <label for="batterHitByPitch">사구:</label>
     <input type="text" id="batterHitByPitch" name="hitByPitch" oninput="validateNumberInput(Event)"><br>
 
-    <label for="sacrificeBunts">Sacrifice Bunts:</label>
+    <label for="sacrificeBunts">희생 번트:</label>
     <input type="text" id="sacrificeBunts" name="sacrificeBunts" oninput="validateNumberInput(Event)"><br>
 
-    <label for="sacrificeFlies">Sacrifice Flies:</label>
+    <label for="sacrificeFlies">희생 플라이:</label>
     <input type="text" id="sacrificeFlies" name="sacrificeFlies" oninput="validateNumberInput(Event)"><br>
 
-
-    <label for="batterStrikeouts">Strikeouts:</label>
+    <label for="batterStrikeouts">삼진:</label>
     <input type="text" id="batterStrikeouts" name="strikeouts" oninput="validateNumberInput(Event)"><br>
 
-    <label for="errors">Errors:</label>
+    <label for="errors">실책:</label>
     <input type="text" id="errors" name="errors" oninput="validateNumberInput(Event)"><br>
 
-    <button type="submit">Save Batter</button>
+    <button type="submit">타자 저장</button>
 </form>
 
 <hr>
 
 <!-- 투수 추가 및 수정 -->
-<h2>Pitcher (투수)</h2>
+<h2>투수</h2>
 <form action="/player/save-pitcher" method="post">
-    <label for="pitcherName">Name:</label>
+    <label for="pitcherName">이름:</label>
     <input type="text" id="pitcherName" name="playerName" required><br>
 
-    <label for="pitcherTeam">Team:</label>
+    <label for="pitcherTeam">팀:</label>
     <input type="text" id="pitcherTeam" name="team" ><br>
 
-    <label for="pitcherGamesPlayed">Games Played:</label>
+    <label for="pitcherGamesPlayed">경기 수:</label>
     <input type="text" id="pitcherGamesPlayed" name="gamesPlayed" oninput="validateNumberInput(Event)"><br>
 
-    <label for="inningsPitched">Innings Pitched:</label>
+    <label for="inningsPitched">이닝:</label>
     <input type="text" id="inningsPitched" name="inningsPitched" oninput="validateNumberInput(Event, true)"><br>
 
-    <label for="wins">Wins:</label>
+    <label for="wins">승:</label>
     <input type="text" id="wins" name="wins" oninput="validateNumberInput(Event)"><br>
 
-    <label for="losses">Losses:</label>
+    <label for="losses">패:</label>
     <input type="text" id="losses" name="losses" oninput="validateNumberInput(Event)"><br>
 
-    <label for="saves">Saves:</label>
+    <label for="saves">세이브:</label>
     <input type="text" id="saves" name="saves" oninput="validateNumberInput(Event)"><br>
 
-    <label for="holds">Holds:</label>
+    <label for="holds">홀드:</label>
     <input type="text" id="holds" name="holds" oninput="validateNumberInput(Event)"><br>
 
-    <label for="hitsAllowed">Hits Allowed:</label>
+    <label for="hitsAllowed">피안타:</label>
     <input type="text" id="hitsAllowed" name="hitsAllowed" oninput="validateNumberInput(Event)"><br>
 
-    <label for="homeRunsAllowed">Home Runs Allowed:</label>
+    <label for="homeRunsAllowed">피홈런:</label>
     <input type="text" id="homeRunsAllowed" name="homeRunsAllowed" oninput="validateNumberInput(Event)"><br>
 
-    <label for="walksAllowed">Walks Allowed:</label>
+    <label for="walksAllowed">피볼넷:</label>
     <input type="text" id="walksAllowed" name="walksAllowed" oninput="validateNumberInput(Event)"><br>
 
-    <label for="pitcherHitByPitch">Hit by Pitch:</label>
+    <label for="pitcherHitByPitch">사구:</label>
     <input type="text" id="pitcherHitByPitch" name="hitByPitch" oninput="validateNumberInput(Event)"><br>
 
-    <label for="pitcherStrikeouts">Strikeouts:</label>
+    <label for="pitcherStrikeouts">삼진:</label>
     <input type="text" id="pitcherStrikeouts" name="strikeouts" oninput="validateNumberInput(Event)"><br>
 
-    <label for="runsAllowed">Runs Allowed:</label>
+    <label for="runsAllowed">실점:</label>
     <input type="text" id="runsAllowed" name="runsAllowed" oninput="validateNumberInput(Event)"><br>
 
-    <button type="submit">Save Pitcher</button>
+    <button type="submit">투수 저장</button>
 </form>
 
-<br>
-<a href="/">메인 화면으로 돌아가기</a>
 </body>
 </html>

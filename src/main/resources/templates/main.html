@@ -2,16 +2,34 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
-    <title>Main Page</title>
+    <title>메인 페이지</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+        nav ul li {
+            margin: 10px 0;
+        }
+    </style>
 </head>
 <body>
-<h1>Baseball Stats Dashboard</h1>
+<h1>야구 전적 검색</h1>
 <nav>
     <ul>
-        <li><a href="/player/search">Search Player</a></li>
-        <li><a href="/player/add-edit">Add/Edit Player</a></li>
-        <li><a href="/ranking">View Rankings</a></li>
-        <li><a href="/team">Team Info</a></li>
+        <li><a href="/player/search">선수 검색</a></li>
+        <li><a href="/player/add-edit">선수 추가/수정</a></li>
+        <li><a href="/ranking">랭킹</a></li>
+        <li><a href="/team">팀 정보</a></li>
     </ul>
 </nav>
 </body>

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
-    <title>Ranking Page</title>
+    <title>랭킹</title>
     <script>
         // JavaScript 함수: 타입에 따라 스탯 옵션 변경
         function updateStatOptions() {
@@ -55,7 +55,9 @@
 
 
 <body>
-<h1>Ranking Page</h1>
+<h1>랭킹</h1>
+<a href="/">메인 화면으로 돌아가기</a>
+<br> <br>
 <form action="/ranking" method="get">
     <label for="type">선수 유형:</label>
     <select id="type" name="type" onchange="updateStatOptions()">
@@ -135,6 +137,6 @@
     </tr>
     </tbody>
 </table>
-<a href="/">메인 화면으로 돌아가기</a>
+
 </body>
 </html>
